@@ -1,0 +1,111 @@
+﻿@model domain.Models.catagory
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom CSS for Add Category form */
+        body {
+            background-image: url('/img/natural.webp');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        /* Style for file input */
+        .form-control-file {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+            .form-control-file label {
+                cursor: pointer;
+                display: inline-block;
+                background-color: #007bff;
+                color: #fff;
+                padding: 6px 12px;
+                border-radius: 4px;
+                font-size: 0.875rem;
+                line-height: 1.5;
+                width: 100%;
+                text-align: center;
+            }
+
+            .form-control-file input[type="file"] {
+                display: none;
+            }
+
+        .btn-submit {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="container">
+            <h2 class="mb-4">Add Category</h2>
+            <form asp-action="Add" asp-controller="Catagory" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="Name">Category Name:</label>
+                    <input type="text" class="form-control" id="Name" name="Name" required>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Upload Image:</label>
+                    <div class="form-control-file">
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                        <label for="image">Choose File</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

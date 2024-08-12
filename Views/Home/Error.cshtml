@@ -1,0 +1,55 @@
+﻿
+    <!-- Custom CSS -->
+    <style>
+        .error-container {
+            width: 400px; /* Set the width of the container */
+            height: 300px; /* Set the height of the container */
+            margin: 50px auto; /* Center the div horizontally and add top margin */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8d7da;
+            color: #721c24;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+
+            .error-container h4 {
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+
+            .error-container p {
+                margin-bottom: 0;
+            }
+
+            .error-container ul {
+                padding-left: 20px; /* Add padding to list */
+                text-align: left; /* Align text to left */
+            }
+    </style>
+
+<body>
+   
+    <br />
+
+    <div class="container">
+        <div class="error-container">
+            <h4>Error Encountered</h4>
+            <p>An error occurred while processing your request:</p>
+            <ul>
+                <li>Invalid input data.</li>
+                <li>Server error.</li>
+                <!-- Add more specific error messages dynamically here -->
+            </ul>
+            <p>Please try again later or contact support if the problem persists.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

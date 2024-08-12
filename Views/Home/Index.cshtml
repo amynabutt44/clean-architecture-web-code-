@@ -1,0 +1,146 @@
+﻿@model domain.Models.viewmodel.Catagoryproduct
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="container">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/img/COURSAL IMAGE.webp" class="d-block" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <p class="slide-bar">We deliver fine quality serums</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/red.webp" class="d-block" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <p class="slide-bar">Our products use natural organic stuff</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/img/hand_and_foot_cream_copy.webp" class="d-block" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <p class="slide-bar">We deliver on time</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+       
+    </div>
+</div>
+
+
+<div id="searchResults">
+    <!-- Search results will be dynamically populated here -->
+</div>
+
+<br />
+<br />
+
+<div class="container shop-category" id="shop-by-cat">
+    <p class="display-6 shop-name"> Our Categories</p>
+    <div class="row">
+        @foreach (var category in Model.c)
+        {
+            <div class="col-12 col-lg-3 col-xxl-3 col-xl-3 col-md-6 col-sm-12">
+                <div class="product-item">
+					
+                    <img src="@Url.Content("~/uploadedfiles/" + category.image)" alt="@category.Name">
+                    <div class="products/@category.Name.ToLower().Replace(" ", "")">@category.Name</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@{
+    ViewData["Title"] = "Home Page";
+
+
+    int maxProductsToShow = 8; // Variable to limit the number of products displayed
+    int productCount = 0;
+}
+
+
+
+<!-- Shop by category section -->
+<div class="container shop-category" id="sale">
+    <p class="display-6 shop-name" id="NEW-ARRIVAL"> NEW ARRIVALS </p>
+    <div class="row">
+        @foreach (var product in Model.product)
+        {
+            if (productCount >= maxProductsToShow)
+            {
+                break;
+            }
+            productCount++;
+
+            <div class="col-12 col-lg-3 col-xxl-3 col-xl-3 col-md-6 col-sm-12 mb-4">
+                <!-- Added mb-4 for bottom margin -->
+                <div class="product-item">
+                    <img src="@Url.Content("~/uploadedfiles/" + product.image)" alt="@product.name">
+                    <div class="product-details">
+                        <div class="product-name">@product.name</div>
+                        <div class="product-price">$@product.price</div>
+
+                        <form action="/AddToCart/Cart" method="post">
+                            <input type="hidden" name="productId" value="@product.Id">
+
+                            <button class="btn btn-primary add-to-cart" style="">
+                                add to cart
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@foreach (var product in Model.product)
+{
+    string modalLink = "productModal" + product.Id;
+    <div class="modal fade" id="@modalLink" tabindex="-1" aria-labelledby="modalLabel@product.Id" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel@product.Id">@product.name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="~/uploadedfiles/@product.image"
+                                 alt="@product.name"
+                                 class="img-fluid"
+                                 style="height: 300px; object-fit: cover; object-position: center;" />
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Display Product Description -->
+                            <p><strong>ID:</strong> @product.Id</p>
+                            <p>@product.description</p>
+                            <p><strong>Price:</strong> $@product.price</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@* <partial name ="_partiallayout" model="Model.product"> *@
+
+
+<!-- Include script for handling search functionality (as previously discussed) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
